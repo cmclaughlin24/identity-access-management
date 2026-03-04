@@ -61,6 +61,13 @@ $ make frontend
 > [!Important]
 > When Vite is run in `preview` mode, it does not support live reload.
 
+##### Development Servers
+
+|      MFE       |         Server         |
+| :------------: | :--------------------: |
+|   container    | http://localhost::3000 |
+| authentication | http://localhost::3001 |
+
 #### Build the MFE(s)
 
 To build the application(s) locally:
@@ -76,3 +83,6 @@ To build the application(s) with Docker:
 $ docker build -f docker/Dockerfile .
 ```
 
+#### Test Automation
+
+Coming Soon 🔜
