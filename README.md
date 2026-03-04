@@ -58,6 +58,9 @@ $ make frontend
 > [!Note]
 > When using either _Docker_ or _Make_ to start the MFEs, the build will be automatically run.
 
+> [!Important]
+> When Vite is run in `preview` mode, it does not support live reload.
+
 #### Build the MFE(s)
 
 To build the application(s) locally:
