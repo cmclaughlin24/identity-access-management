@@ -73,9 +73,16 @@ $ make frontend
 To build the application(s) locally:
 
 ```bash
+# w/node
 $ cd [microfrontend/directory]
 $ npm run build
+
+# w/make
+$ make build
 ```
+
+> [!Note]
+> Using _Make_ to build the MFEs will build all projects.
 
 To build the application(s) with Docker:
 
