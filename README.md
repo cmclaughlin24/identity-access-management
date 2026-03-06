@@ -67,6 +67,7 @@ $ make frontend
 | :------------: | :--------------------: |
 |   container    | http://localhost:3000 |
 | authentication | http://localhost:3001 |
+| certification  | http://localhost:3002 |
 
 #### Build the MFE(s)
 

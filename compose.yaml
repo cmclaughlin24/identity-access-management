@@ -19,3 +19,13 @@ services:
           path: ./frontend/authentication/
     ports:
       - "3001:5173"
+  certification:
+    build:
+      context: ./frontend/certification
+      dockerfile: ./docker/Dockerfile.dev
+    develop:
+      watch:
+        - action: rebuild
+          path: ./frontend/certification/
+    ports:
+      - "3002:5173"

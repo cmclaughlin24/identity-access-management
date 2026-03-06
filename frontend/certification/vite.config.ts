@@ -7,10 +7,10 @@ export default defineConfig({
   plugins: [
     react(),
     federation({
-      name: "container",
-      remotes: {
-        authentication: "http:localhost:3001/assets/remoteEntry.js",
-        certification: "http://localhost:3002/assets/remoteEntry.js",
+      name: "certification",
+      filename: "remoteEntry.js",
+      exposes: {
+        "./Routes": "./src/Routes",
       },
       shared: ["react", "react-dom"],
     }),
