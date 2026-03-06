@@ -9,8 +9,13 @@ import { getWebAutoInstrumentations } from "@opentelemetry/auto-instrumentations
 
 const OTEL_ENDPOINT = "/otlp";
 const OTEL_SERVICE_NAME = "container";
+const OTEL_ENABLED = import.meta.env.VITE_OTEL_ENABLED === "true";
 
 export function initTelemetry() {
+  if (!OTEL_ENABLED) {
+    return;
+  }
+
   const exporter = new OTLPTraceExporter({
     url: `${OTEL_ENDPOINT}/v1/traces`,
   });

@@ -3,6 +3,8 @@ services:
     build:
       context: ./frontend/container
       dockerfile: ./docker/Dockerfile.dev
+      args:
+        - OTEL_ENABLED=true
     develop:
       watch:
         - action: rebuild
@@ -17,6 +19,8 @@ services:
     build:
       context: ./frontend/authentication
       dockerfile: ./docker/Dockerfile.dev
+      args:
+        - OTEL_ENABLED=true
     develop:
       watch:
         - action: rebuild
@@ -29,6 +33,8 @@ services:
     build:
       context: ./frontend/certification
       dockerfile: ./docker/Dockerfile.dev
+      args:
+        - OTEL_ENABLED=true
     develop:
       watch:
         - action: rebuild

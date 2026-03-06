@@ -1,5 +1,9 @@
 FROM node:24-alpine
 
+ARG OTEL_ENABLED=false
+
+ENV VITE_OTEL_ENABLED=${OTEL_ENABLED}
+
 WORKDIR /app
 
 COPY *.json .
