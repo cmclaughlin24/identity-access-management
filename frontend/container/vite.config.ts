@@ -25,6 +25,10 @@ export default defineConfig({
         target: process.env.CERTIFICATION_HOST || "http://localhost:3002",
         rewrite: (path) => path.replace(/^\/certification-ui/, ""),
       },
+      "/otlp": {
+        target: process.env.OTLP_HOST || "http://localhost:4318",
+        rewrite: (path) => path.replace(/^\/otlp/, ""),
+      },
     },
   },
 });

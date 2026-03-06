@@ -94,3 +94,11 @@ $ docker build -f docker/Dockerfile .
 #### Test Automation
 
 Coming Soon 🔜
+
+## Architecture
+
+Coming Soon 🔜
+
+### Observability w/OpenTelemetry
+
+Coming Soon 🔜

@@ -15,4 +15,12 @@ export default defineConfig({
       shared: ["react", "react-dom"],
     }),
   ],
+  server: {
+    proxy: {
+      "/otlp": {
+        target: process.env.OTLP_HOST || "http://localhost:4318",
+        rewrite: (path) => path.replace(/^\/otlp/, ""),
+      },
+    },
+  },
 });

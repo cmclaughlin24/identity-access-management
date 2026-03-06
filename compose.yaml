@@ -3,6 +3,8 @@ services:
     build:
       context: ./frontend/container
       dockerfile: ./docker/Dockerfile.dev
+      args:
+        - OTEL_ENABLED=true
     develop:
       watch:
         - action: rebuild
@@ -12,23 +14,48 @@ services:
     environment:
       - AUTHENTICATION_HOST=http://authentication:5173
       - CERTIFICATION_HOST=http://certification:5173
+      - OTLP_HOST=http://otel-collector:4318
   authentication:
     build:
       context: ./frontend/authentication
       dockerfile: ./docker/Dockerfile.dev
+      args:
+        - OTEL_ENABLED=true
     develop:
       watch:
         - action: rebuild
           path: ./frontend/authentication/
     ports:
       - "3001:5173"
+    environment:
+      - OTLP_HOST=http://otel-collector:4318
   certification:
     build:
       context: ./frontend/certification
       dockerfile: ./docker/Dockerfile.dev
+      args:
+        - OTEL_ENABLED=true
     develop:
       watch:
         - action: rebuild
           path: ./frontend/certification/
     ports:
       - "3002:5173"
+    environment:
+      - OTLP_HOST=http://otel-collector:4318
+  # Infrastructure
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib
+    ports:
+      - "4317:4317" # OTLP gRPC receiver
+      - "4318:4318" # OTLP http receiver
+    volumes:
+      - ./config/otel-collector.config.yaml:/etc/otelcol-contrib/config.yaml
+  jaeger:
+    image: jaegertracing/jaeger:latest
+    ports:
+      - "16686:16686"
+      - "4317" # OTLP gRPC receiver
+      - "4318" # OTLP http receiver
+    environment:
+      - LOG_LEVEL=debug
