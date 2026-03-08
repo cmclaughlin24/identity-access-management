@@ -1,0 +1,15 @@
+.mast-header-branding {
+  a {
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      text-decoration: none;
+    }
+
+    img {
+      aspect-ratio: 10rem / 1rem;
+      width: 10rem;
+    }
+  }
+}

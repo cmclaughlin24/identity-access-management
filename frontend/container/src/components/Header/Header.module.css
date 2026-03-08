@@ -1,0 +1,9 @@
+.mast-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-height: 4.5rem;
+  padding: 1.25rem 2.5rem;
+  background-color: var(--primary-red);
+  border-bottom: 4px var(--secondary-yellow) solid;
+}
