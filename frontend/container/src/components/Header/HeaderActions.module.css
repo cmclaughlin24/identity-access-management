@@ -1,0 +1,12 @@
+.mast-head-actions {
+  justify-self: end;
+
+  a {
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      text-decoration: none;
+    }
+  }
+}
