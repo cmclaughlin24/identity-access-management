@@ -13,7 +13,7 @@ const ApplicationHeader: React.FC = function () {
       </Header.Branding>
       <Header.MainNavigation items={navItems} />
       <Header.Actions>
-        <NavLink to="/authentication">Login</NavLink>
+        <NavLink to="/authentication/login">Login</NavLink>
       </Header.Actions>
     </Header>
   );
