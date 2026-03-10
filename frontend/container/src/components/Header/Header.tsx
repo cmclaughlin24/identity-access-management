@@ -1,78 +1,102 @@
-import { isValidElement } from "react";
-import classes from "./Header.module.css";
-import HeaderActions, { type HeaderActionsElement } from "./HeaderActions";
 import HeaderBranding, { type HeaderBrandingElement } from "./HeaderBranding";
-import HeaderNavigation, {
-  type HeaderNavigationElement,
-} from "./HeaderNavigation";
+import type { HeaderContentElement } from "./HeaderContent";
+import classes from "./Header.module.css";
+import HeaderContent from "./HeaderContent";
+import HeaderActionItem from "./HeaderActionItem";
+import HeaderActions from "./HeaderActions";
+import { joinClassNames } from "../../utils/misc";
 
-type HeaderChildren =
-  | HeaderBrandingElement
-  | HeaderNavigationElement
-  | HeaderActionsElement;
+/**
+ * A list of all the valid children of the `Header` component. Used to ensure
+ * that only valid children are passed to the Header component.
+ */
+type HeaderChildren = HeaderBrandingElement | HeaderContentElement;
 
-interface HeaderComponent extends React.FC<{ children: HeaderChildren[] }> {
-  Branding: typeof HeaderBranding;
-  MainNavigation: typeof HeaderNavigation;
+export interface HeaderComponent extends React.FC<{
+  children: HeaderChildren[];
+  className?: string;
+}> {
+  /**
+   * A sub-component of `Header` that is used to render a list of actions that
+   * should act as app-wide functions, such as login/logout, account settings,
+   * etc.
+   *
+   * @example
+   * ```tsx
+   * <Header.Actions>
+   *   <Header.ActionItem>
+   *     <NavLink to="/authentication/login" end>
+   *       Login
+   *     </NavLink>
+   *   </Header.ActionItem>
+   * </Header.Actions>
+   * ```
+   */
   Actions: typeof HeaderActions;
+
+  /**
+   * A sub-component of `Header.Actions` that is used to render an individual action item
+   * that should act as an app-wide function, such as login/logout, account
+   * settings, etc.
+   *
+   * @example
+   * ```tsx
+   * <Header.Actions>
+   *   <Header.ActionItem>
+   *     <NavLink to="/authentication/login" end>
+   *       Login
+   *     </NavLink>
+   *   </Header.ActionItem>
+   * </Header.Actions>
+   * ```
+   */
+  ActionItem: typeof HeaderActionItem;
+
+  /**
+   * A sub-component of `Header` that is used to render the branding of the app, such
+   * as the logo and company name.
+   *
+   * @example
+   * ```tsx
+   * <Header.Branding>
+   *    <img src="/path/to/image.jpg" alt="Super Awesome Brand Logo" />
+   * </Header.Branding>
+   * ```
+   */
+  Branding: typeof HeaderBranding;
+
+  /**
+   * A sub-component of `Header` that is used to render the main content of the header
+   * such as the main navigation, search bar, etc.
+   *
+   * @example
+   * ```tsx
+   * <Header.Content>
+   *  <nav>
+   *    <ul>
+   *      <li>Home</li>
+   *      <li>About</li>
+   *    </ul>
+   *  </nav>
+   * </Header.Content>
+   * ```
+   */
+  Content: typeof HeaderContent;
 }
 
-function parseChildren(children: HeaderChildren[]) {
-  let branding: HeaderBrandingElement | undefined;
-  let navigation: HeaderNavigationElement | undefined;
-  let actions: HeaderActionsElement | undefined;
-
-  for (const child of children) {
-    if (!isValidElement(child)) {
-      continue;
-    }
-
-    if (child.type === HeaderBranding) {
-      if (branding) {
-        throw new Error(
-          `HeaderComponent: only one ${HeaderBranding.name} child element is allowed`,
-        );
-      }
-
-      branding = child as HeaderBrandingElement;
-    } else if (child.type === HeaderNavigation) {
-      if (navigation) {
-        throw new Error(
-          `HeaderComponent: only one ${HeaderNavigation.name} child element is allowed`,
-        );
-      }
-
-      navigation = child as HeaderNavigationElement;
-    } else if (child.type === HeaderActions) {
-      if (actions) {
-        throw new Error(
-          `HeaderComponent: only one ${HeaderActions.name} child element is allowed`,
-        );
-      }
-
-      actions = child as HeaderActionsElement;
-    }
-  }
-
-  return { branding, navigation, actions };
-}
-
-const Header: HeaderComponent = function ({ children }) {
-  const { branding, navigation, actions } = parseChildren(children);
+const Header: HeaderComponent = function ({ className, children }) {
+  const classNames = joinClassNames(classes["mast-head"], className);
 
   return (
-    <header role="banner" className={classes["mast-head"]}>
-      {branding && branding}
-      {navigation && navigation}
-      {actions && actions}
+    <header role="banner" className={classNames}>
+      {children}
     </header>
   );
 };
 
-Header.Branding = HeaderBranding;
-
-Header.MainNavigation = HeaderNavigation;
-
 Header.Actions = HeaderActions;
+Header.ActionItem = HeaderActionItem;
+Header.Branding = HeaderBranding;
+Header.Content = HeaderContent;
 
 export default Header;

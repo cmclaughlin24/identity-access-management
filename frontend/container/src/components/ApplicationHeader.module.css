@@ -1,0 +1,25 @@
+.mast-head-content--responsive {
+  @media screen and (min-width: 64rem) {
+    flex: 1;
+  }
+}
+
+.mast-head-mobile {
+  @media screen and (min-width: 64rem) {
+    display: none;
+  }
+}
+
+.mast-head-desktop {
+  display: none;
+  width: 100%;
+
+  .mast-head-navigation {
+    margin: auto;
+  }
+
+  @media screen and (min-width: 64rem) {
+    display: flex;
+    align-items: center;
+  }
+}

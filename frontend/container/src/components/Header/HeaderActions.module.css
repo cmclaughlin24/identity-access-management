@@ -1,16 +1,5 @@
 .mast-head-actions {
-  width: 10rem;
-  justify-self: end;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-
-  a {
-    &:link,
-    &:visited,
-    &:hover,
-    &:active {
-      text-decoration: none;
-    }
-  }
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
